@@ -1,5 +1,6 @@
 class Cd 
 
+  @@all_Cds = []
   attr_reader :name, :artist
 
   def initialize(attributes)
@@ -8,6 +9,10 @@ class Cd
   end
 
   def self.all
-    []
+    @@all_Cds
+  end
+
+  def save 
+    @@all_Cds << self
   end
 end

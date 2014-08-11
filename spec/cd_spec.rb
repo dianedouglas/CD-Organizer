@@ -12,8 +12,21 @@ describe 'Cd' do
   end
 
   describe '.all' do 
+
     it 'starts empty.' do 
       expect(Cd.all).to eq []
+    end
+
+  end
+
+  describe '#save' do 
+
+    it 'saves a cd to the collection.' do 
+      test_cdA = Cd.new({:album_name => 'Dimensional Bleedthrough', :artist_name => 'Krallice'})
+      test_cdB = Cd.new({:album_name => 'Disintegration', :artist_name => 'The Cure'})
+      test_cdA.save
+      test_cdB.save
+      expect(Cd.all).to eq [test_cdA, test_cdB]
     end
   end
 
