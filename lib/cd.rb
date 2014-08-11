@@ -10,8 +10,8 @@ class Cd
 
   def self.all
     output_Cds = []
-    @@all_Cds.each do |key, value|
-      output_Cds << value
+    @@all_Cds.each_value do |album|
+      output_Cds << album
     end
     output_Cds
   end
@@ -23,9 +23,9 @@ class Cd
   def self.search_album_names(name)
     output_Cds = []
     name = name.downcase
-    @@all_Cds.each do |key, value|
-      if key.downcase.include? name
-        output_Cds << value
+    @@all_Cds.each_value do |album|
+      if album.name.downcase.include? name
+        output_Cds << album
       end
     end  
     output_Cds  
@@ -34,9 +34,9 @@ class Cd
   def self.search_artist_names(name)
     output_Cds = []
     name = name.downcase
-    @@all_Cds.each do |key, value|
-      if value.artist.downcase.include? name
-        output_Cds << value
+    @@all_Cds.each_value do |album|
+      if album.artist.downcase.include? name
+        output_Cds << album
       end
     end  
     output_Cds  
