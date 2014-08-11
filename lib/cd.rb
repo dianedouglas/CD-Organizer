@@ -1,6 +1,6 @@
 class Cd 
 
-  @@all_Cds = []
+  @@all_Cds = {}
   attr_accessor :name, :artist
 
   def initialize(attributes)
@@ -9,11 +9,15 @@ class Cd
   end
 
   def self.all
-    @@all_Cds
+    output_Cds = []
+    @@all_Cds.each do |key, value|
+      output_Cds << value
+    end
+    output_Cds
   end
 
   def save 
-    @@all_Cds << self
+    @@all_Cds[@name] = self
   end
 
 end

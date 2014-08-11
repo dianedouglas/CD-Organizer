@@ -32,11 +32,18 @@ describe 'Cd' do
 
   describe '#artist' do 
 
-    it 'changes the saved artist name to the string in the argument.' do 
+    it 'changes the saved artist name.' do 
       test_cd = Cd.new({:album_name => 'Darker Days Ahead', :artist_name => 'Tragedy'})
       test_cd.artist = 'Amoebix'
-      test_cd.name = 'Arise'
       expect(test_cd.artist).to eq 'Amoebix'
+    end
+  end
+
+  describe '#name' do 
+
+    it 'changes the saved album name.' do 
+      test_cd = Cd.new({:album_name => 'Darker Days Ahead', :artist_name => 'Tragedy'})
+      test_cd.name = 'Arise'
       expect(test_cd.name).to eq 'Arise'
     end
   end
