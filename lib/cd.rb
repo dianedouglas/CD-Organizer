@@ -20,4 +20,19 @@ class Cd
     @@all_Cds[@name] = self
   end
 
+  def self.search_album_names(name)
+    output_Cds = []
+    name = name.downcase
+    @@all_Cds.each do |key, value|
+      if key.downcase.include? name
+        output_Cds << value
+      end
+    end  
+    output_Cds  
+  end
+
+  def ==(album)
+    self.name == album.name && self.artist == album.artist
+  end
+
 end

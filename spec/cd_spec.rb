@@ -48,4 +48,13 @@ describe 'Cd' do
     end
   end
 
+  describe '.search_album_names' do 
+
+    it 'returns all albums matching the input string.' do 
+      test_cdA = Cd.new({:album_name => 'Dimensional Bleedthrough', :artist_name => 'Krallice'})
+      test_cdB = Cd.new({:album_name => 'Disintegration', :artist_name => 'The Cure'})
+      expect(Cd.search_album_names('Dimensional')).to eq [test_cdA]
+    end
+  end
+
 end
