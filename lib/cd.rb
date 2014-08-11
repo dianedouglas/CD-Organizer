@@ -1,7 +1,7 @@
 class Cd 
 
   @@all_Cds = []
-  attr_reader :name, :artist
+  attr_accessor :name, :artist
 
   def initialize(attributes)
     @name = attributes[:album_name]
@@ -15,4 +15,5 @@ class Cd
   def save 
     @@all_Cds << self
   end
+
 end
