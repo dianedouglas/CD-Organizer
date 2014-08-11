@@ -1,9 +1,9 @@
 class Cd 
-	
+
 	attr_reader :name, :artist
 
-	def initialize(album_name, artist_name)
-		@name = album_name
-		@artist = artist_name
+	def initialize(attributes)
+		@name = attributes[:album_name]
+		@artist = attributes[:artist_name]
 	end
 end
