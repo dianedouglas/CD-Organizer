@@ -21,6 +21,8 @@ def main_menu
 			search_title
 		elsif menu_choice == 'artist'
 			search_artist
+		elsif menu_choice == 'e'
+			edit_cd
 		elsif menu_choice == 'x'
 			puts "Bye for now!"
 			exit
@@ -64,7 +66,7 @@ def search_title
 	sleep 1
 	cds = Cd.search_album_names(title)
 	if cds.length == 0
-		puts "I'm afraid you don't have anything by #{title}!"
+		puts "I'm afraid you don't have #{title}!"
 	else
 		puts "Here's what I got for ya...\n"
 		puts ""
@@ -74,7 +76,7 @@ def search_title
 			puts ""
 			sleep 1
 		end
-		puts "Hope I found it for ya!"
+		puts "Hope I found it!"
 		puts ""
 	end
 end
@@ -96,6 +98,85 @@ def search_artist
 			puts ""
 			sleep 1
 		end
+	end
+end
+
+def cd_selected(cd)
+	puts "[t] to change the Title."
+	puts "[a] to change the Artist."
+	puts "[m] to go back to the main menu."
+	menu_choice = gets.chomp
+	if menu_choice == "t"
+		loop do
+			puts "Enter the new title: "
+			title = gets.chomp
+			cd.name = title
+			puts "Got it."
+			puts ""
+			puts "#{cd.name}"
+			puts "By #{cd.artist}"
+			puts ""
+			puts "Is that correct? y/n"
+			correct = gets.chomp
+			if correct == 'y'
+				puts "Cool!"
+				cd_selected(cd)
+			else
+				puts "Ok, let's try again."
+			end
+		end
+	elsif menu_choice == 'a'
+		loop do
+			puts "Enter the new artist name: "
+			artist = gets.chomp
+			cd.artist = artist
+			puts "Got it."
+			puts ""
+			puts "#{cd.name}"
+			puts "By #{cd.artist}"
+			puts ""
+			puts "Is that correct? y/n"
+			correct = gets.chomp
+			if correct == 'y'
+				puts "Cool!"
+				cd_selected(cd)
+			else
+				puts "Ok, let's try again."
+			end			
+		end
+	elsif menu_choice == 'm'
+		main_menu
+	else
+		puts "Not sure what you mean..."
+		puts ""
+		cd_selected(cd)
+	end
+end
+
+def edit_cd
+	puts "Enter the title of the album you want to edit."
+	count = 0
+	list_cds
+	title = gets.chomp
+	cds = Cd.search_album_names(title)
+	if cds.length == 0
+		puts "I'm afraid you don't have #{title}!"
+	elsif cds.length == 1
+		puts ""
+		puts "You selected: "
+		puts "#{cds[0].name}"
+		puts "By #{cds[0].artist}"
+		puts ""
+		cd_selected(cds[0])
+	else 
+		puts "Hmm... I have these."
+		cds.each do |cd|
+			puts "#{cd.name}"
+			puts "By #{cd.artist}\n"
+			puts ""
+			sleep 1
+		end
+		edit_cd
 	end
 end
 
