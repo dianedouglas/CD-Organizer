@@ -13,6 +13,8 @@ class Genre
   end
 
   def add_cd(cd)
-    @library << cd
+    if !@library.include? cd
+      @library << cd
+    end
   end
 end

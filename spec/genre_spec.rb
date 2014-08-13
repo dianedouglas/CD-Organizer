@@ -32,5 +32,11 @@ describe 'Genre' do
       @test_genre.add_cd(@test_cd)
       expect(@test_genre.library).to eq [@test_cd]
     end
+
+    it 'should not be added a second time if the cd object is already in the genre library.' do
+      @test_genre.add_cd(@test_cd)
+      @test_genre.add_cd(@test_cd)    
+      expect(@test_genre.library).to eq [@test_cd]
+    end
   end
 end
