@@ -8,6 +8,7 @@ describe 'Genre' do
   before do
     @test_genre = Genre.new({'name' => 'Black Metal'})
     @test_cd = Cd.new({:album_name => 'Konigsforst', :artist_name => 'Gas'})
+    @test_cd2 = Cd.new({:album_name => 'Winter in the Belly of a Snake', :artist_name => 'Venetian Snares'})
   end
 
   describe '#initialize' do
@@ -37,6 +38,13 @@ describe 'Genre' do
       @test_genre.add_cd(@test_cd)
       @test_genre.add_cd(@test_cd)    
       expect(@test_genre.library).to eq [@test_cd]
+    end
+  end
+
+  describe '.all' do
+
+    it 'returns all genres.' do
+      expect(Genre.all).to eq [@test_genre]
     end
   end
 end
