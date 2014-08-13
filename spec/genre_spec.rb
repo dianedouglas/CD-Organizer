@@ -13,7 +13,7 @@ describe 'Genre' do
 
   describe '#initialize' do
 
-    it 'is initialized with a name.' do
+    it 'is initialized with a name and saved to the group of all genres.' do
       expect(@test_genre).to be_an_instance_of Genre
     end
   end
@@ -38,6 +38,23 @@ describe 'Genre' do
       @test_genre.add_cd(@test_cd)
       @test_genre.add_cd(@test_cd)    
       expect(@test_genre.library).to eq [@test_cd]
+    end
+  end
+
+  describe '#delete_cd' do
+
+    it 'deletes the cd from the genre.' do
+      @test_genre.delete_cd(@test_cd)
+      expect(@test_genre.library).to eq []      
+    end
+  end
+
+  describe '#delete_genre' do
+
+    it 'deletes this genre.' do
+      expect(Genre.all).to eq [@test_genre]      
+      @test_genre.delete_genre
+      expect(Genre.all).to eq []      
     end
   end
 

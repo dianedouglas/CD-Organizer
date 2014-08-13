@@ -27,4 +27,12 @@ class Genre
     end
     genres
   end
+
+  def delete_cd(cd)
+    @library.delete(cd)
+  end
+
+  def delete_genre
+    @@all_genres.delete(self.name)
+  end
 end
