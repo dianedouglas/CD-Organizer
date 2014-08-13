@@ -1,8 +1,10 @@
 require 'rspec'
 require 'pry'
 require 'cd'
+require 'genre'
 
 describe 'Cd' do 
+  
   before do
     @test_cd = Cd.new({:album_name => 'Dimensional Bleedthrough', :artist_name => 'Krallice'})
     @test_cdA = Cd.new({:album_name => 'Dimensional Bleedthrough', :artist_name => 'Krallice'})
