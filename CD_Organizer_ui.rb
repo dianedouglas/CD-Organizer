@@ -353,7 +353,9 @@ def edit_genre
 			puts "It's gone!"
 		elsif menu_choice == 'delete genre'
 			@current_genre.delete_genre
-			puts "It's gone!"		
+			puts "It's gone!"
+			main_menu
+			break
 		else
 			puts "Sorry! That's not a valid menu choice. Try again?"
 		end
