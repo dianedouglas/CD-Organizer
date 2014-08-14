@@ -251,6 +251,7 @@ def add_cd_to_genre
 		puts "#{cds[0].name}"
 		puts "By #{cds[0].artist}"
 		puts ""
+		select_genre
 		@current_genre.add_cd(cds[0])
 	else 
 		puts "Hmm... I have these."
