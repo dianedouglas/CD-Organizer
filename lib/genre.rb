@@ -1,4 +1,4 @@
-require 'cd'
+require './lib/cd'
 
 class Genre
 

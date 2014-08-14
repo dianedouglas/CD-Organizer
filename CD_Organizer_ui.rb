@@ -1,3 +1,4 @@
+require './lib/genre'
 require './lib/cd'
 require 'pry'
 
@@ -274,7 +275,6 @@ def print_genres
 		all_genres.each do |genre|
 			puts "#{genre.name}"
 			puts ""
-			end
 			sleep 1
 		end
 	end
