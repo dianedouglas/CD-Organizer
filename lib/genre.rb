@@ -28,6 +28,16 @@ class Genre
     genres
   end
 
+  def self.search_genre_name(name)
+    genres = []
+    @@all_genres.each_value do |genre|
+      if genre.name.include? name
+        genres << genre
+      end
+    end
+    genres
+  end
+
   def delete_cd(cd)
     @library.delete(cd)
   end

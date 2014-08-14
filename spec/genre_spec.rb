@@ -24,6 +24,7 @@ describe 'Genre' do
       expect(@test_genre.name).to eq 'Black Metal'
       @test_genre.name = 'Techno'
       expect(@test_genre.name).to eq 'Techno'
+      expect(Genre.all[0].name).to eq 'Techno'
     end
   end
 
@@ -62,6 +63,13 @@ describe 'Genre' do
 
     it 'returns all genres.' do
       expect(Genre.all).to eq [@test_genre]
+    end
+  end
+
+  describe '.search_genre_name' do
+
+    it 'returns all genres with names matching the the input string' do
+      expect(Genre.search_genre_name('Black Metal')).to eq [@test_genre]
     end
   end
 end
