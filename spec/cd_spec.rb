@@ -32,7 +32,7 @@ describe 'Cd' do
     it 'saves a cd to the collection.' do 
       @test_cdA.save
       @test_cdB.save
-      expect(Cd.all).to eq [@test_cdA, @test_cdB]
+        expect(Cd.all).to eq [@test_cdA, @test_cdB]
     end
   end
 

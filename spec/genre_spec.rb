@@ -42,10 +42,10 @@ describe 'Genre' do
     end
   end
 
-  describe '#delete_cd' do
+  describe '#remove_cd' do
 
     it 'deletes the cd from the genre.' do
-      @test_genre.delete_cd(@test_cd)
+      @test_genre.remove_cd(@test_cd)
       expect(@test_genre.library).to eq []      
     end
   end

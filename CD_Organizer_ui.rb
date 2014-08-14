@@ -55,6 +55,37 @@ def main_menu
   end
 end
 
+
+def select_cd
+	puts "Please select an album by typing its title."
+	puts ""
+	sleep 1
+	count = 0
+	print_cds
+	title = gets.chomp
+	cds = Cd.search_album_names(title)
+	if cds.length == 0
+		puts "I'm afraid you don't have #{title}!"
+	elsif cds.length == 1
+		puts ""
+		puts "You selected: "
+		puts "#{cds[0].name}"
+		puts "By #{cds[0].artist}"
+		puts ""
+		return cds[0]
+	else 
+		puts "Hmm... I have these."
+		cds.each do |cd|
+			puts "#{cd.name}"
+			puts "By #{cd.artist}\n"
+			puts ""
+			sleep 1
+		end
+		select_cd
+	end
+end
+
+
 def create_cd
 	puts ""
 	puts "Enter artist name:"
@@ -303,6 +334,8 @@ def edit_genre
 		menu_choice = gets.chomp.downcase
 
 		if menu_choice == 'n'
+			puts ""
+			puts "Please enter the new genre name."
 			name = gets.chomp
 			@current_genre.name = name
 			puts "Like this right?"
@@ -316,7 +349,7 @@ def edit_genre
 			end
 		elsif menu_choice == 'delete cd'
 			selected_cd = select_cd
-			@current_genre.delete_cd(selected_cd)
+			@current_genre.remove_cd(selected_cd)
 			puts "It's gone!"
 		elsif menu_choice == 'delete genre'
 			@current_genre.delete_genre
