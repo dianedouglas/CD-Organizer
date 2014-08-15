@@ -361,6 +361,7 @@ def edit_genre
 			selected_cd = select_cd
 			@current_genre.remove_cd(selected_cd)
 			puts "It's gone!"
+			main_menu
 		elsif menu_choice == 'delete genre'
 			@current_genre.delete_genre
 			puts "It's gone!"
