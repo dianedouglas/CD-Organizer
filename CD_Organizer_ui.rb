@@ -4,23 +4,35 @@ require 'pry'
 
 @current_genre = nil
 
-def main_menu
-  	puts "Hi there! Welcome to your music library!"
-  loop do
-  	puts "\n"
-		puts "[c] to Create a CD."
-		puts "[print cds] to list all your albums."
-		puts "[title] to search by Title for a particular album."
-		puts "[artist] to see which Cds you have by an Artist."
-		puts "[edit cd] to Edit the information on a Cd."
+def welcome
+	puts ""
+	puts ""
+	puts "Hi there! Welcome to your music library!"
+	main_menu
+end
 
+def main_menu
+  loop do
+  	puts ""
+  	puts "Please choose an option..."
+  	puts ""
+  	puts "CDs:"
+  	puts ""
+		puts "Enter [c] to Create a CD."
+		puts "Enter [print cds] to list all your albums."
+		puts "Enter [title] to search by Title for a particular album."
+		puts "Enter [artist] to see which Cds you have by an Artist."
+		puts "Enter [edit cd] to Edit the information on a Cd."
 		puts ""
-		puts "[g] to Create a Genre."
-		puts "[a] to Add a CD to a Genre."
-		puts "[print genres] to list all the Genres in your collection."
-		puts "[genre] to print out all albums in a particular genre."
-		puts "[edit genre] to Edit a Genre."
-		puts "[x] to eXit."
+		puts "Genres:"
+		puts ""
+		puts "Enter [g] to Create a Genre."
+		puts "Enter [a] to Add a CD to a Genre."
+		puts "Enter [print genres] to list all the Genres in your collection."
+		puts "Enter [genre] to print out all albums in a particular genre."
+		puts "Enter [edit genre] to Edit a Genre."
+		puts ""
+		puts "Enter [x] to eXit."
 
 		menu_choice = gets.chomp.downcase
 		if menu_choice == 'c'
@@ -279,7 +291,7 @@ def select_genre
 end
 
 def add_cd_to_genre
-	puts "Enter the title of the album you add."
+	puts "Enter the title of the album you want to add."
 	count = 0
 	print_cds
 	title = gets.chomp
@@ -294,6 +306,7 @@ def add_cd_to_genre
 		puts ""
 		select_genre
 		@current_genre.add_cd(cds[0])
+		print_cds_from_genre
 	else
 		puts "Hmm... I have these."
 		cds.each do |cd|
@@ -324,6 +337,10 @@ end
 
 def search_genre
 	select_genre
+	print_cds_from_genre
+end
+
+def print_cds_from_genre
 	puts "OK, here is all the #{@current_genre.name} you have..."
 		@current_genre.library.each do |cd|
 			puts "#{cd.name}"
@@ -373,4 +390,4 @@ def edit_genre
 	end
 end
 
-main_menu
+welcome
