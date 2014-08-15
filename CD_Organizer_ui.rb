@@ -13,7 +13,7 @@ def main_menu
 		puts "[title] to search by Title for a particular album."
 		puts "[artist] to see which Cds you have by an Artist."
 		puts "[edit cd] to Edit the information on a Cd."
-		
+
 		puts ""
 		puts "[g] to Create a Genre."
 		puts "[a] to Add a CD to a Genre."
@@ -21,7 +21,7 @@ def main_menu
 		puts "[genre] to print out all albums in a particular genre."
 		puts "[edit genre] to Edit a Genre."
 		puts "[x] to eXit."
-		
+
 		menu_choice = gets.chomp.downcase
 		if menu_choice == 'c'
 			create_cd
@@ -47,7 +47,7 @@ def main_menu
 		elsif menu_choice == 'x'
 			puts "Bye for now!"
 			exit
-		else 
+		else
 			puts "Didn't I give you enough options? Perhaps sir could try one of those? :)"
 			puts "\n"
 		end
@@ -73,7 +73,7 @@ def select_cd
 		puts "By #{cds[0].artist}"
 		puts ""
 		return cds[0]
-	else 
+	else
 		puts "Hmm... I have these."
 		cds.each do |cd|
 			puts "#{cd.name}"
@@ -195,7 +195,7 @@ def cd_selected(cd)
 				cd_selected(cd)
 			else
 				puts "Ok, let's try again."
-			end			
+			end
 		end
 	elsif menu_choice == 'm'
 		main_menu
@@ -221,7 +221,7 @@ def edit_cd
 		puts "By #{cds[0].artist}"
 		puts ""
 		cd_selected(cds[0])
-	else 
+	else
 		puts "Hmm... I have these."
 		cds.each do |cd|
 			puts "#{cd.name}"
@@ -246,9 +246,19 @@ def select_genre
 	print_genres
 	count = 0
 	genre = gets.chomp
-	genres = Genre.search_genre_name(genre)
+	genres = Genre.search_genre_name(genre) #deal with caps
 	if genres.length == 0
 		puts "You haven't created that genre yet!"
+		puts "Press [a] to add the genre."
+		puts "Press [s] to select a different one."
+		selection = gets.chomp
+		if selection == 'a'
+			new_genre = Genre.new({'name' => genre})
+			@current_genre = new_genre
+			puts "Added #{@current_genre.name}."
+		else
+			select_genre
+		end
 	elsif genres.length == 1
 		puts ""
 		puts "You selected: "
@@ -284,7 +294,7 @@ def add_cd_to_genre
 		puts ""
 		select_genre
 		@current_genre.add_cd(cds[0])
-	else 
+	else
 		puts "Hmm... I have these."
 		cds.each do |cd|
 			puts "#{cd.name}"
