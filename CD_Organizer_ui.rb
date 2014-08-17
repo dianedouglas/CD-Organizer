@@ -61,20 +61,17 @@ def main_menu
 			exit
 		else
 			puts "Didn't I give you enough options? Perhaps sir could try one of those? :)"
-			puts "\n"
+			puts ""
 		end
 
   end
 end
 
+#cd methods:
 
-def select_cd
-	puts "Please select an album by typing its title."
-	puts ""
-	sleep 1
-	count = 0
-	print_cds
+def select_cd(force_selection)
 	title = gets.chomp
+	count = 0
 	cds = Cd.search_album_names(title)
 	if cds.length == 0
 		puts "I'm afraid you don't have #{title}!"
@@ -93,7 +90,11 @@ def select_cd
 			puts ""
 			sleep 1
 		end
-		select_cd
+		if (force_selection)
+			select_cd
+		else
+			puts "Hope I found it!"
+		end
 	end
 end
 
@@ -111,7 +112,7 @@ end
 def print_cds
 	puts "Let's see now..."
 	sleep 1
-	puts ...
+	puts "..."
 	all_cds = Cd.all
 	if all_cds.length == 0
 		puts "It looks like you don't have any yet, sorry!"
@@ -127,42 +128,28 @@ end
 
 def search_title
 	puts "Please enter the title of the cd you want to find: "
-	title = gets.chomp
-	sleep 1
-	cds = Cd.search_album_names(title)
-	if cds.length == 0
-		puts "I'm afraid you don't have #{title}!"
-	else
-		puts "Here's what I got for ya...\n"
-		puts ""
-		cds.each do |cd|
-			puts "#{cd.name}"
-			puts "By #{cd.artist}\n"
-			puts ""
-			sleep 1
-		end
-		puts "Hope I found it!"
-		puts ""
-	end
+	select_cd(false)
 end
 
 def search_artist
 	puts "Who are you looking for? Enter an artist name: "
-	title = gets.chomp
+	artist = gets.chomp
 	sleep 1
-	puts "Lets see... #{title}..."
+	puts "Lets see... #{artist}..."
 	sleep 1
-	cds = Cd.search_artist_names(title)
+	cds = Cd.search_artist_names(artist)
 	if cds.length == 0
-		puts "I'm afraid you don't have anything by #{title}!"
+		puts "I'm afraid you don't have anything by #{artist}!"
 	else
-		puts "Here's what I could find...\n"
+		puts "Here's what I could find..."
+		puts ""
 		cds.each do |cd|
 			puts "#{cd.name}"
 			puts "By #{cd.artist}"
 			puts ""
 			sleep 1
 		end
+		puts "Hope I found it!"
 	end
 end
 
@@ -170,7 +157,7 @@ def cd_selected(cd)
 	puts "[t] to change the Title."
 	puts "[a] to change the Artist."
 	puts "[m] to go back to the main menu."
-	menu_choice = gets.chomp
+	menu_choice = gets.chomp.downcase
 	if menu_choice == "t"
 		loop do
 			puts "Enter the new title: "
@@ -219,30 +206,13 @@ def cd_selected(cd)
 end
 
 def edit_cd
-	puts "Enter the title of the album you want to edit."
-	count = 0
+	puts ""
+	puts "Please enter the name of the cd you would like to edit."
+	puts ""
+	sleep 1
 	print_cds
-	title = gets.chomp
-	cds = Cd.search_album_names(title)
-	if cds.length == 0
-		puts "I'm afraid you don't have #{title}!"
-	elsif cds.length == 1
-		puts ""
-		puts "You selected: "
-		puts "#{cds[0].name}"
-		puts "By #{cds[0].artist}"
-		puts ""
-		cd_selected(cds[0])
-	else
-		puts "Hmm... I have these."
-		cds.each do |cd|
-			puts "#{cd.name}"
-			puts "By #{cd.artist}\n"
-			puts ""
-			sleep 1
-		end
-		edit_cd
-	end
+	cd_to_edit = select_cd(true)
+	cd_selected(cd_to_edit)
 end
 
 def create_genre
